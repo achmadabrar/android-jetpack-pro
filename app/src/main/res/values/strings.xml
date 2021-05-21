@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MovieCatalogue</string>
+    <string name="TvShows">TvShows</string>
+    <string name="Movies">Movies</string>
+    <string name="Detail">Detail</string>
+    <string name="title">AQUAMANNNNNNNNNNNNNN</string>
+    <string name="year">(2019)</string>
+    <string name="see_all">Selengkapnya</string>
+    <string name="vote">Rating</string>
+    <string name="desc">A former American G.I. joins a yakuza family after his release from prison in post-World War II.</string>
+    <string name="list_movie">List Movie</string>
+    <string name="list_genre">List Genre</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="budget">Budget: %s</string>
+    <string name="status">Status: %s</string>
+    <string name="income">Income: %s</string>
+    <string name="director">Director: %s</string>
+    <string name="screenplay">Screenplay: %s</string>
+    <string name="release_genre_duration">%s | %s | %s</string>
+    <string name="stories">Story: %s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
