@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abrar.moviecatalogue.R
-import com.abrar.moviecatalogue.detailtvshow.DetailTvShowFragment
+import com.abrar.moviecatalogue.core.ViewModelFactory
+import com.abrar.moviecatalogue.tvshows.detailtvshow.DetailTvShowFragment
 import com.abrar.moviecatalogue.tvshows.domain.models.TvShowModel
 import kotlinx.android.synthetic.main.fragment_tv_shows.*
 
@@ -31,16 +33,20 @@ class TvShowsFragment : Fragment(), TvShowViewHolder.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[TvShowViewModel::class.java]
 
-        adapter = TvShowAdapter(viewModel.getTvShow(), this)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.title =
-            resources.getString(R.string.TvShows)
-        loadRecyclerView()
+        viewModel.getTvShowRemote().observe(viewLifecycleOwner, Observer {
+            adapter = TvShowAdapter(it, this)
+            (activity as AppCompatActivity).setSupportActionBar(toolbar)
+            (activity as AppCompatActivity).supportActionBar?.title =
+                resources.getString(R.string.TvShows)
+            loadRecyclerView()
+        })
+
     }
 
     private fun loadRecyclerView() {
@@ -53,7 +59,7 @@ class TvShowsFragment : Fragment(), TvShowViewHolder.Listener {
     override fun onClickTvShow(tvShowModel: TvShowModel?) {
         Toast.makeText(requireContext(), "dipilih ${tvShowModel?.title}", Toast.LENGTH_SHORT).show()
         fragmentManager!!.beginTransaction()
-            .replace(R.id.frame_layout, DetailTvShowFragment.newInstance(tvShowModel?.id))
+            .replace(R.id.frame_layout, DetailTvShowFragment.newInstance(tvShowModel?.id?.toInt()))
             .addToBackStack("tvShow").commit()
     }
 }

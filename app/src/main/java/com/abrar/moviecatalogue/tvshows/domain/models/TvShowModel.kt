@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TvShowModel(
-    val id: String,
+    val id: Long,
     val title: String,
     val desc: String,
-    val poster: Int
+    val poster: String?
 ):Parcelable

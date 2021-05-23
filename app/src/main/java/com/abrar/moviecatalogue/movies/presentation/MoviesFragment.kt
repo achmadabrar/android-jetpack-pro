@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abrar.moviecatalogue.R
-import com.abrar.moviecatalogue.detailmovie.DetailMovieFragment
+import com.abrar.moviecatalogue.core.ViewModelFactory
+import com.abrar.moviecatalogue.movies.detailmovie.DetailMovieFragment
 import com.abrar.moviecatalogue.movies.domain.models.MovieModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -30,16 +32,20 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[MoviesViewModel::class.java]
 
-        (activity as AppCompatActivity).setSupportActionBar(toolbar_main)
-        (activity as AppCompatActivity).supportActionBar?.title =
-            resources.getString(R.string.Movies)
-        adapter = MoviesAdapter(viewModel.getMovies(), this)
-        loadRecyclerView()
+        viewModel.getMovies().observe(viewLifecycleOwner, Observer {
+            (activity as AppCompatActivity).setSupportActionBar(toolbar_main)
+            (activity as AppCompatActivity).supportActionBar?.title =
+                resources.getString(R.string.Movies)
+            adapter = MoviesAdapter(it, this)
+            loadRecyclerView()
+        })
+
     }
 
     private fun loadRecyclerView() {
@@ -51,7 +57,7 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Listener {
     override fun onClickMovie(movieModel: MovieModel?) {
         Toast.makeText(requireContext(), "dipilih ${movieModel?.title}", Toast.LENGTH_SHORT).show()
         fragmentManager!!.beginTransaction()
-            .replace(R.id.frame_layout, DetailMovieFragment.newInstance(movieModel?.id))
+            .replace(R.id.frame_layout, DetailMovieFragment.newInstance(movieModel?.id?.toInt()))
             .addToBackStack("movie").commit()
     }
 }

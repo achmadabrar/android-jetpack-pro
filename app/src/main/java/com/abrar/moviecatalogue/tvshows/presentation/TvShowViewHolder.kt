@@ -12,9 +12,8 @@ class TvShowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(tvShowModel: TvShowModel, listener: Listener?) {
         with(itemView) {
             Glide.with(this)
-                .load(resources.getDrawable(tvShowModel.poster))
+                .load("https://image.tmdb.org/t/p/original/"+tvShowModel.poster)
                 .into(imageViewMovie)
-
             textViewTitle.text = tvShowModel.title
 
             itemView.setOnClickListener {
