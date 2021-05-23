@@ -18,7 +18,7 @@ class MainActivityTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    //menampilkan data movie
+    //menampilkan data movie sesuai size dari dummy data
     @Test
     fun loadMovies() {
         onView(withId(R.id.recycler_movies)).check(matches(isDisplayed()))
@@ -39,7 +39,7 @@ class MainActivityTest {
         onView(withId(R.id.text_desc_movie)).check(matches(withText(dummyMovies[0].desc)))
     }
 
-    //menampilkan list tvshow
+    //menampilkan list tvshow sesuai size dari dummy data
     @Test
     fun loadTvShows() {
         onView(withId(R.id.tvShowMenu)).perform(click())
@@ -49,6 +49,18 @@ class MainActivityTest {
                 10
             )
         )
+    }
+
+    //menampilkan list tvshow, kemudian melakukan klik pada item ke 0 (a star is born) dan menampilkan halaman detail
+    @Test
+    fun loadDetailTvShow() {
+        onView(withId(R.id.tvShowMenu)).perform(click())
+        onView(withId(R.id.recycler_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.recycler_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.text_title_tvshow)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_title_tvshow)).check(matches(withText(dummyTvShows[0].title)))
+        onView(withId(R.id.text_desc_tvshow)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_desc_tvshow)).check(matches(withText(dummyTvShows[0].desc)))
     }
 
 }

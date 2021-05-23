@@ -10,10 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.abrar.moviecatalogue.R
 import com.abrar.moviecatalogue.tvshows.domain.models.TvShowModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_detail_tv_show.image_poster_movie
-import kotlinx.android.synthetic.main.fragment_detail_tv_show.text_desc_movie
-import kotlinx.android.synthetic.main.fragment_detail_tv_show.text_title_movie
-import kotlinx.android.synthetic.main.fragment_detail_tv_show.toolbar
+import kotlinx.android.synthetic.main.fragment_detail_tv_show.*
 
 private const val TVSHOW = "tv_show"
 
@@ -50,8 +47,8 @@ class DetailTvShowFragment : Fragment() {
                 .load(resources.getDrawable(viewModel.getDetailTvShowById().poster))
                 .into(image_poster_movie)
 
-            text_title_movie.text = viewModel.getDetailTvShowById().title
-            text_desc_movie.text = viewModel.getDetailTvShowById().desc
+            text_title_tvshow.text = viewModel.getDetailTvShowById().title
+            text_desc_tvshow.text = viewModel.getDetailTvShowById().desc
 
         }
     }
