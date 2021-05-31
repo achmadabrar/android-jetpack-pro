@@ -27,7 +27,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_poster_movie"
+                android:id="@+id/image_poster_tvshow"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="10dp"
@@ -39,7 +39,7 @@
             <TextView
                 android:id="@+id/text_title_tvshow"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_poster_movie"
+                app:layout_constraintStart_toEndOf="@id/image_poster_tvshow"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="10dp"
                 tools:text="Sweeney Todd: The Demon Barber Of Fleet Street"
@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/text_overview_title"
                 app:layout_constraintTop_toBottomOf="@id/text_title_tvshow"
-                app:layout_constraintStart_toEndOf="@id/image_poster_movie"
+                app:layout_constraintStart_toEndOf="@id/image_poster_tvshow"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="10dp"
                 android:text="Overview"
@@ -67,7 +67,7 @@
             <TextView
                 android:id="@+id/text_desc_tvshow"
                 app:layout_constraintTop_toBottomOf="@id/text_overview_title"
-                app:layout_constraintStart_toEndOf="@id/image_poster_movie"
+                app:layout_constraintStart_toEndOf="@id/image_poster_tvshow"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="10dp"
                 android:ellipsize="end"
